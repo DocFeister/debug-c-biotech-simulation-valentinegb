@@ -1,0 +1,9 @@
+// Project tasks configuration. See https://zed.dev/docs/tasks for documentation.
+//
+// Example:
+[
+  {
+    "label": "Compile & Run",
+    "command": "clang++ -std=gnu++2c main.cpp && ./a.out"
+  }
+]
