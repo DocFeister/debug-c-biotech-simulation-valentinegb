@@ -19,7 +19,7 @@ jobs:
       with:
         test-name: Compiles & Runs (syntax errors check)
         setup-command: ''
-        command: g++ main.cpp -o main.out && ./main.out
+        command: g++-14 -std=gnu++2c main.cpp -o main.out && ./main.out
         timeout: 5
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
