@@ -1,0 +1,29 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Compiles & Runs (syntax errors check)
+      id: compiles-runs-syntax-errors-check
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Compiles & Runs (syntax errors check)
+        setup-command: ''
+        command: g++ main.cpp -o main.out && ./main.out
+        timeout: 5
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        COMPILES-RUNS-SYNTAX-ERRORS-CHECK_RESULTS: "${{steps.compiles-runs-syntax-errors-check.outputs.result}}"
+      with:
+        runners: compiles-runs-syntax-errors-check
